@@ -1,0 +1,33 @@
+def searchRange(nums, target):
+    def findFirst(nums, target):
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] >= target:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return left
+
+    def findLast(nums, target):
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] <= target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return right
+
+    first_pos = findFirst(nums, target)
+    last_pos = findLast(nums, target)
+
+    if first_pos <= last_pos:
+        return [first_pos, last_pos]
+    else:
+        return [-1, -1]
+
+# Test examples
+print(searchRange([5, 7, 7, 8, 8, 10], 8))  # Output: [3, 4]
+print(searchRange([5, 7, 7, 8, 8, 10], 6))  # Output: [-1, -1]
+print(searchRange([], 0))  # Output: [-1, -1]
